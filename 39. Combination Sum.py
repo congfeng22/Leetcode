@@ -5,4 +5,4 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        print("test lol")
+        
