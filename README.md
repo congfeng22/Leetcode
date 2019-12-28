@@ -1,2 +1,2 @@
 # Leetcode
-Leetcode attempts
+Leetcode problems
