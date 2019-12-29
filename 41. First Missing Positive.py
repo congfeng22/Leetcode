@@ -4,18 +4,24 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        maxnum = 0
-        powersum = 1
+        n = len(nums)
+        for idx in range(n-1,-1,-1):
+            if nums[idx]<=0:
+                del nums[idx]
+        print(nums)
         for i in nums:
-            if i>maxnum:
-                maxnum = i
-            if i>0:
-                powersum += 2**i
-        binstr = bin(2**(maxnum+1)-1-powersum)
-        for i in range(2,len(binstr)):
-            if binstr[-i] == '1':
-                return i-1
-        return maxnum+1
-        
+            if i<0:
+                a = -i
+            else:
+                a = i
+            if a>len(nums):
+                continue
+            if nums[a-1]>0:
+                nums[a-1] *= -1
+        for i in range(len(nums)):
+            if nums[i]>0:
+                return i+1
+        return len(nums)+1
+    
 test = Solution()
-print(test.firstMissingPositive([3,5,4,2,1]))
+print(test.firstMissingPositive([1,2,0,4,1,2]))
