@@ -15,6 +15,7 @@ class Solution(object):
             else:
                 r = (l+r)//2
         pivot = r
+        print(pivot)
         
         if target > nums[-1]:
             l,r = 0,pivot-1
@@ -34,4 +35,4 @@ class Solution(object):
         
     
 test = Solution()
-print(test.search([1,3],1))
+print(test.search([4,5,1,2,3],3))

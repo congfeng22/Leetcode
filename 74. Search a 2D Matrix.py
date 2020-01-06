@@ -9,17 +9,15 @@ class Solution(object):
             return False
         top,down,left,right = 0,len(matrix),0,len(matrix[0])
         while top<down-1:
-            mid = (top+down)//2
-            if target>=matrix[mid][0]:
-                top = mid
+            if target>=matrix[(top+down)//2][0]:
+                top = (top+down)//2
             else:
-                down = mid
+                down = (top+down)//2
         while left<right-1:
-            mid = (left+right)//2
-            if target>=matrix[top][mid]:
-                left = mid
+            if target>=matrix[top][(left+right)//2]:
+                left = (left+right)//2
             else:
-                right = mid
+                right = (left+right)//2
         if matrix[top][left]==target:
             return True
         return False
