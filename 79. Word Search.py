@@ -40,7 +40,7 @@ class Solution(object):
                             triedbefore.append(forbiddened.copy())
                             del forbiddened[-1]
                             depth -= 1
-                        if forbiddened == []:
+                        if forbiddened == []: 
                             break
                     if depth == len(word):
                         return True
