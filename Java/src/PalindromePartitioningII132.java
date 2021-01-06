@@ -29,9 +29,17 @@ public class PalindromePartitioningII132 {
         }
         return dp[s.length()-1];
     }
+    public int bs(int num, int[] arr, int l, int r){
+        if (l==r) return l;
+        int m = (l+r)/2;
+        if (arr[m]>=num) return bs(num,arr,l,m);
+        else return bs(num,arr,m+1,r);
+    }
     public static void main(String[] args){
         PalindromePartitioningII132 test = new PalindromePartitioningII132();
         String s = "abbab";
-        System.out.println(test.minCut(s));
+        //System.out.println(test.minCut(s));
+        int[] arr = {0,0,1,1,1,1,1,1,2};
+        System.out.println(test.bs(2,arr,0,8));
     }
 }

@@ -49,4 +49,8 @@ public class NQueens51 {
         }
         return true;
     }
+    public static void main(String[] args){
+        NQueens51 test = new NQueens51();
+        System.out.println(test.solveNQueens(4));
+    }
 }

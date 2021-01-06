@@ -3,7 +3,7 @@ import java.util.List;
 
 // 116. Populating Next Right Pointers in Each Node
 // 117. Populating Next Right Pointers in Each Node II
-/*
+
 public class Node {
     public int val;
     public Node left;
@@ -23,9 +23,10 @@ public class Node {
         next = _next;
     }
 }
-*/
+
 
 // 133. Clone Graph
+/*
 public class Node {
     public int val;
     public List<Node> neighbors;
@@ -45,3 +46,5 @@ public class Node {
         neighbors = _neighbors;
     }
 }
+
+*/
