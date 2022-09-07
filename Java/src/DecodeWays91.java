@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+
 public class DecodeWays91 {
     public int numDecodings(String s) {
         // dp[i] = number of ways to decode the first i characters of s
@@ -12,10 +18,5 @@ public class DecodeWays91 {
             } else dp[i] = dp[i-1]+ ((s.charAt(i-2)=='1' || (s.charAt(i-2)=='2' && s.charAt(i-1)<='6'))?dp[i-2]:0);
         }
         return dp[s.length()];
-    }
-    public static void main(String[] args){
-        DecodeWays91 test = new DecodeWays91();
-        String t = "226";
-        System.out.println(test.numDecodings(t));
     }
 }
