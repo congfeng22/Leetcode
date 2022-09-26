@@ -1,25 +1,18 @@
-class Solution(object):
-    def combinationSum(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
-        properlist = [i for i in candidates if i<=target]
-        if properlist == []:
-            if target == 0:
-                return [[]]
-            return []
-        if len(properlist)==1 and target%properlist[0] ==0:
-            return [properlist*(target//properlist[0])]
-        newlist = properlist[:]
-        allcombis = []
-        times = 0
-        del newlist[0]
-        while properlist[0]*times<=target:
-            combis = [[properlist[0]]*times+i for i in Solution.combinationSum(self,newlist,target-properlist[0]*times)]
-            allcombis += combis
-            times += 1
-        return allcombis
-test = Solution()
-print(test.combinationSum([2,3,5],8))
+def combinationSum(candidates, target):
+    ret = []
+    def backtracking(candidates, i, path, target):
+        #print(i, path, target)
+        if target == 0:
+            ret.append(list(path))
+            return
+        if i >= len(candidates):
+            return
+        if target >= candidates[i]:
+            path.append(candidates[i])
+            
+            backtracking(candidates, i, path, target-candidates[i])
+            path.pop()
+
+        backtracking(candidates, i+1, path, target)
+    backtracking(candidates, 0, [], target)
+    return ret

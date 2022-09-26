@@ -1,15 +1,14 @@
-class Solution(object):
-    
-    def maxSubArray(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        maxsum = nums[0]
-        sumendinghere = nums[0]
-        for i in range(1,len(nums)):
-            sumendinghere = max(nums[i],sumendinghere + nums[i])
-            maxsum = max(maxsum, sumendinghere)
-        return maxsum
-test = Solution()
-print(test.maxSubArray([1,2,-10,3,4,5]))
+def maxSubArray(nums):
+    l,r = 0,0
+    currsum = nums[0]
+    ret = nums[0]
+    while r < len(nums)-1:
+        if currsum >= 0:
+            r += 1
+            currsum += nums[r]
+            ret = max(ret, currsum)
+        else:
+            l,r = r+1,r+1
+            currsum = nums[l]
+            ret = max(ret, currsum)
+    return ret
