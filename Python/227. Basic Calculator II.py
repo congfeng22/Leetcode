@@ -1,50 +1,34 @@
 def calculate(s):
-    ret = []
     idx = 0
-    while idx < len(s) and s[idx] == ' ':
-        idx += 1
-    end = idx
-    while end < len(s) and ord(s[end]) >= ord('0') and ord(s[end]) <= ord('9'):
-        end += 1
-    ret.append(int(s[idx:end]))
-    idx = end
-    #print(idx)
+    opstack = []
+    numstack = []
+    digits = [str(i) for i in range(10)]
     while idx < len(s):
         if s[idx] == ' ':
             idx += 1
-            continue
-        elif s[idx] == '+':
-            idx += 1
-            while idx < len(s) and s[idx] == ' ':
+        elif s[idx] in digits:
+            num = 0
+            while idx < len(s) and s[idx] in digits:
+                num = 10*num + int(s[idx])
                 idx += 1
-            end = idx
-            while end < len(s) and ord(s[end]) >= ord('0') and ord(s[end]) <= ord('9'):
-                end += 1
-            ret.append(int(s[idx:end]))
-        elif s[idx] == '-':
+            if opstack and opstack[-1] in ['*','/']:
+                op = opstack.pop()
+                first = numstack.pop()
+                if op == '*':
+                    numstack.append(first*num)
+                else:
+                    numstack.append(first//num)
+            else:
+                numstack.append(num)
+        else:
+            opstack.append(s[idx])
             idx += 1
-            while idx < len(s) and s[idx] == ' ':
-                idx += 1
-            end = idx
-            while end < len(s) and ord(s[end]) >= ord('0') and ord(s[end]) <= ord('9'):
-                end += 1
-            #print(idx, end)
-            ret.append(-int(s[idx:end]))
-        elif s[idx] == '*':
-            idx += 1
-            while idx < len(s) and s[idx] == ' ':
-                idx += 1
-            end = idx
-            while end < len(s) and ord(s[end]) >= ord('0') and ord(s[end]) <= ord('9'):
-                end += 1
-            ret[-1] *= int(s[idx:end])
-        elif s[idx] == '/':
-            idx += 1
-            while idx < len(s) and s[idx] == ' ':
-                idx += 1
-            end = idx
-            while end < len(s) and ord(s[end]) >= ord('0') and ord(s[end]) <= ord('9'):
-                end += 1
-            ret[-1] = math.floor(ret[-1]/int(s[idx:end])) if ret[-1]>=0 else math.ceil(ret[-1]/int(s[idx:end]))
-        idx += 1
-    return sum(ret)
+    
+    ret = numstack[0]
+    for i in range(1,len(numstack)):
+        op = opstack[i-1]
+        if op == '+':
+            ret += numstack[i]
+        else:
+            ret -= numstack[i]
+    return ret
